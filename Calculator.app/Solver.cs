@@ -8,18 +8,18 @@ using System.Threading.Tasks;
 
 internal class Solver
 {
-    private double left;
-    private double right;
-    private string operation;
-    internal Solver(double left,double right,string operation)
+    private float left;
+    private float right;
+    private StringBuilder operation;
+    internal Solver(float left,float right,StringBuilder operation)
     {
         this.left = left;
         this.right = right;
         this.operation = operation;
     }
-    internal double Solve()
+    internal float Solve()
     {
-        switch (operation)
+        switch (operation.ToString())
         {
             case "+":
                 return left + right;
@@ -30,7 +30,7 @@ internal class Solver
             case "/":
                 return left / right;
             default:
-                throw new InvalidOperationException("Invalid operation");
+                return 0;
         }
     }
 }

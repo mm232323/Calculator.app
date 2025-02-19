@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 internal static class Evaluator
 {
-    internal static double leftOperator { get; set; }
-    internal static double rightOperator {get;set;}
-    internal static string operation { get; set; } = string.Empty; 
+    internal static float leftOperator { get; set; }
+    internal static float rightOperator {get;set;}
+    internal static StringBuilder operation { get; set; } = new(); 
 }

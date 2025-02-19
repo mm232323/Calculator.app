@@ -9,9 +9,9 @@ public partial class Form1 : Form
         InitializeComponent();
     }
 
-    private void but1_Click(object sender, EventArgs e)
+    private void handle_But_Click(Button but)
     {
-        resultBar.Text = resultBar.Text + but1.Text;
+        resultBar.Text = resultBar.Text + but.Text;
         if (Evaluator.operation?.Length == 0)
         {
             Evaluator.leftOperator = int.Parse(resultBar.Text);
@@ -21,159 +21,85 @@ public partial class Form1 : Form
         {
             Evaluator.rightOperator = int.Parse(resultBar.Text);
         }
+    }
+    private void handle_Operation_Click(Button op)
+    {
+        if (Evaluator.leftOperator != 0)
+        {
+            Evaluator.operation.Append(op.Text);
+            resultBar.Text = "";
+        }
+    }
 
+    private void but1_Click(object sender, EventArgs e)
+    {
+
+        handle_But_Click(but1);
     }
 
     private void but2_Click(object sender, EventArgs e)
     {
-        resultBar.Text = resultBar.Text + but2.Text;
-        if (Evaluator.operation?.Length == 0)
-        {
-            Evaluator.leftOperator = int.Parse(resultBar.Text);
-
-        }
-        else
-        {
-            Evaluator.rightOperator = int.Parse(resultBar.Text);
-        }
+        handle_But_Click(but2);
 
     }
 
     private void but3_Click(object sender, EventArgs e)
     {
-        resultBar.Text = resultBar.Text + but3.Text;
-        if (Evaluator.operation?.Length == 0)
-        {
-            Evaluator.leftOperator = int.Parse(resultBar.Text);
-
-        }
-        else
-        {
-            Evaluator.rightOperator = int.Parse(resultBar.Text);
-        }
-
+        handle_But_Click(but3);
     }
 
     private void but4_Click(object sender, EventArgs e)
     {
-        resultBar.Text = resultBar.Text + but4.Text;
-        if (Evaluator.operation?.Length == 0)
-        {
-            Evaluator.leftOperator = int.Parse(resultBar.Text);
-
-        }
-        else
-        {
-            Evaluator.rightOperator = int.Parse(resultBar.Text);
-        }
+        handle_But_Click(but4);
+        
 
     }
 
     private void but7_Click(object sender, EventArgs e)
     {
-        resultBar.Text = resultBar.Text + but5.Text;
-        if (Evaluator.operation?.Length == 0)
-        {
-            Evaluator.leftOperator = int.Parse(resultBar.Text);
-
-        }
-        else
-        {
-            Evaluator.rightOperator = int.Parse(resultBar.Text);
-        }
-
+        handle_But_Click(but5);
     }
 
     private void but6_Click(object sender, EventArgs e)
     {
-        resultBar.Text = resultBar.Text + but6.Text;
-        if (Evaluator.operation?.Length == 0)
-        {
-            Evaluator.leftOperator = int.Parse(resultBar.Text);
-
-        }
-        else
-        {
-            Evaluator.rightOperator = int.Parse(resultBar.Text);
-        }
-
+        handle_But_Click(but6);
     }
 
     private void but5_Click(object sender, EventArgs e)
     {
-        resultBar.Text = resultBar.Text + but7.Text;
-        if (Evaluator.operation?.Length == 0)
-        {
-            Evaluator.leftOperator = int.Parse(resultBar.Text);
-
-        }
-        else
-        {
-            Evaluator.rightOperator = int.Parse(resultBar.Text);
-        }
-
+        handle_But_Click(but7);
     }
 
     private void but10_Click(object sender, EventArgs e)
     {
-        resultBar.Text = resultBar.Text + but10.Text;
-        if (Evaluator.operation?.Length == 0)
-        {
-            Evaluator.leftOperator = int.Parse(resultBar.Text);
-
-        }
-        else
-        {
-            Evaluator.rightOperator = int.Parse(resultBar.Text);
-        }
-
+        handle_But_Click(but8);
     }
 
     private void but9_Click(object sender, EventArgs e)
     {
-        resultBar.Text = resultBar.Text + but9.Text;
-        if (Evaluator.operation?.Length == 0)
-        {
-            Evaluator.leftOperator = int.Parse(resultBar.Text);
-
-        }
-        else
-        {
-            Evaluator.rightOperator = int.Parse(resultBar.Text);
-        }
-
+        handle_But_Click(but9);
     }
 
     private void but8_Click(object sender, EventArgs e)
     {
-        resultBar.Text = resultBar.Text + but10.Text;
-
-        if (Evaluator.operation?.Length == 0)
-        {
-            Evaluator.leftOperator = int.Parse(resultBar.Text);
-
-        }
-        else
-        {
-            Evaluator.rightOperator = int.Parse(resultBar.Text);
-        }
-
+        handle_But_Click(but10);
     }
 
     private void operator1_Click(object sender, EventArgs e)
     {
-        if (Evaluator.leftOperator != 0)
-        {
-            Evaluator.operation = operator1.Text;
-            resultBar.Text = "";
-        }
+        handle_Operation_Click(operator1);
     }
 
     private void operator2_Click(object sender, EventArgs e)
     {
         if (Evaluator.leftOperator != 0)
         {
-            Evaluator.operation = operator2.Text;
+            if (Evaluator.operation.Length != 0)
+            {
+                resultBar.Text = "-";
+                return;
+            }
+            Evaluator.operation.Append(operator2.Text);
             resultBar.Text = "";
         }
         else
@@ -183,19 +109,11 @@ public partial class Form1 : Form
     }
     private void operator3_Click(object sender, EventArgs e)
     {
-        if (Evaluator.leftOperator != 0)
-        {
-            Evaluator.operation = operator3.Text;
-            resultBar.Text = "";
-        }
+        handle_Operation_Click(operator3);
     }
     private void operator4_Click(object sender, EventArgs e)
     {
-        if (Evaluator.leftOperator != 0)
-        {
-            Evaluator.operation = operator4.Text;
-            resultBar.Text = "";
-        }
+        handle_Operation_Click(operator4);
     }
 
     private void actionTrigger_Click(object sender, EventArgs e)
@@ -206,11 +124,11 @@ public partial class Form1 : Form
             return;
         }
         Solver result = new(Evaluator.leftOperator, Evaluator.rightOperator, Evaluator.operation);
-        double solution = result.Solve();
+        float solution = result.Solve();
         resultBar.Text = solution.ToString();
         Evaluator.leftOperator = solution;
         Evaluator.rightOperator = 0;
-        Evaluator.operation = "";
+        Evaluator.operation.Clear();
     }
 
 }
